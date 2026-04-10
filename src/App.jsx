@@ -1,21 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 
 const HABITS = [
-  { id: "stretch",    name: "Morning stretch",      detail: "Start the day loose" },
-  { id: "meditation", name: "Meditation",            detail: "15 minutes" },
-  { id: "journal",    name: "Gratitude journal",     detail: "Write 3 things" },
-  { id: "acv",        name: "ACV morning drink",     detail: "Baja Gold, cayenne & lemon" },
-  { id: "pushups",    name: "75 push-ups",           detail: "Non-negotiable" },
-  { id: "supps",      name: "Supplements",           detail: "Full stack" },
-  { id: "cold",       name: "Cold shower",           detail: "3 minutes" },
-  { id: "ai",         name: "AI revenue focus",      detail: "60 minutes" },
-  { id: "water",      name: "110 oz of water",       detail: "Stay hydrated all day" },
-  { id: "fasting",    name: "Intermittent fasting",  detail: "Stick to the protocol" },
-  { id: "steps",      name: "15,000 steps",          detail: "Walk it out" },
-  { id: "workout",    name: "Workout",               detail: "Strength or cardio" },
-  { id: "vibration",  name: "Vibration plate",       detail: "15 minutes" },
-  { id: "sauna",      name: "SaunaBox",              detail: "20 minutes — evening" },
-  { id: "quality",    name: "Quality time",          detail: "30 min with a loved one" },
+  { id: "stretch",    name: "Morning stretch" },
+  { id: "meditation", name: "Meditation" },
+  { id: "journal",    name: "Gratitude journal" },
+  { id: "acv",        name: "ACV morning drink" },
+  { id: "pushups",    name: "75 push-ups" },
+  { id: "supps",      name: "Supplements" },
+  { id: "cold",       name: "Cold shower" },
+  { id: "ai",         name: "AI revenue focus" },
+  { id: "water",      name: "110 oz of water" },
+  { id: "fasting",    name: "Intermittent fasting" },
+  { id: "steps",      name: "15,000 steps" },
+  { id: "workout",    name: "Workout" },
+  { id: "vibration",  name: "Vibration plate" },
+  { id: "sauna",      name: "SaunaBox" },
+  { id: "quality",    name: "Quality time" },
 ];
 
 const TOTAL = HABITS.length;
@@ -107,20 +107,19 @@ export default function App() {
     progressWrap: { background: "#f0f0ee", borderRadius: 100, height: 5, marginBottom: "1.25rem", overflow: "hidden" },
     progressFill: { height: "100%", borderRadius: 100, background: "#16a37f", transition: "width 0.3s ease" },
     row: (done) => ({
-      display: "flex", alignItems: "center", gap: 12, padding: "9px 10px",
+      display: "flex", alignItems: "center", gap: 12, padding: "8px 10px",
       borderRadius: 9, cursor: "pointer",
       border: "1px solid " + (done ? "#86efcf" : "transparent"),
       background: done ? "#ecfdf5" : "transparent",
-      marginBottom: 3, transition: "background 0.12s",
+      marginBottom: 2, transition: "background 0.12s",
     }),
     check: (done) => ({
-      width: 22, height: 22, borderRadius: "50%", flexShrink: 0,
+      width: 20, height: 20, borderRadius: "50%", flexShrink: 0,
       display: "flex", alignItems: "center", justifyContent: "center",
       border: "1.5px solid " + (done ? "#16a37f" : "#ccc"),
       background: done ? "#16a37f" : "#fff",
     }),
-    habitName: (done) => ({ fontSize: 14, color: done ? "#065f46" : "#222", fontWeight: 400 }),
-    habitDetail: (done) => ({ fontSize: 12, color: done ? "#10b981" : "#999", marginTop: 1 }),
+    habitName: (done) => ({ fontSize: 14, color: done ? "#065f46" : "#222", fontWeight: 400, flex: 1 }),
     badge: (done) => ({
       fontSize: 11, borderRadius: 100, padding: "2px 8px", flexShrink: 0,
       background: done ? "#a7f3d0" : "#f0f0ee",
@@ -155,14 +154,11 @@ export default function App() {
         return (
           <div key={h.id} style={s.row(done)} onClick={() => toggle(h.id)}>
             <div style={s.check(done)}>
-              {done && <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              {done && <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>}
             </div>
-            <div style={{ flex: 1 }}>
-              <div style={s.habitName(done)}>{h.name}</div>
-              <div style={s.habitDetail(done)}>{h.detail}</div>
-            </div>
+            <div style={s.habitName(done)}>{h.name}</div>
             <div style={s.badge(done)}>{streak}d</div>
           </div>
         );
@@ -170,4 +166,4 @@ export default function App() {
       <button style={s.resetBtn} onClick={resetDay}>Reset today</button>
     </div>
   );
-}
+      }
