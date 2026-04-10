@@ -1,21 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 
 const HABITS = [
-  { id: "stretch",    name: "Morning stretch",      detail: "Start the day loose",        section: "Morning" },
-  { id: "meditation", name: "Meditation",            detail: "15 minutes",                 section: "Morning" },
-  { id: "journal",    name: "Gratitude journal",     detail: "Write 3 things",             section: "Morning" },
-  { id: "acv",        name: "ACV morning drink",     detail: "Baja Gold, cayenne & lemon", section: "Morning" },
-  { id: "pushups",    name: "75 push-ups",           detail: "Non-negotiable",             section: "Morning" },
-  { id: "supps",      name: "Supplements",           detail: "Full stack",                 section: "Morning" },
-  { id: "cold",       name: "Cold shower",           detail: "3 minutes",                  section: "Morning" },
-  { id: "ai",         name: "AI revenue focus",      detail: "60 minutes",                 section: "Growth" },
-  { id: "water",      name: "110 oz of water",       detail: "Stay hydrated all day",      section: "Body" },
-  { id: "fasting",    name: "Intermittent fasting",  detail: "Stick to the protocol",      section: "Body" },
-  { id: "steps",      name: "15,000 steps",          detail: "Walk it out",                section: "Body" },
-  { id: "workout",    name: "Workout",               detail: "Strength or cardio",         section: "Body" },
-  { id: "vibration",  name: "Vibration plate",       detail: "15 minutes",                 section: "Recovery" },
-  { id: "sauna",      name: "SaunaBox",              detail: "20 minutes — evening",       section: "Recovery" },
-  { id: "quality",    name: "Quality time",          detail: "30 min with a loved one",    section: "Connection" },
+  { id: "stretch",    name: "Morning stretch",      detail: "Start the day loose" },
+  { id: "meditation", name: "Meditation",            detail: "15 minutes" },
+  { id: "journal",    name: "Gratitude journal",     detail: "Write 3 things" },
+  { id: "acv",        name: "ACV morning drink",     detail: "Baja Gold, cayenne & lemon" },
+  { id: "pushups",    name: "75 push-ups",           detail: "Non-negotiable" },
+  { id: "supps",      name: "Supplements",           detail: "Full stack" },
+  { id: "cold",       name: "Cold shower",           detail: "3 minutes" },
+  { id: "ai",         name: "AI revenue focus",      detail: "60 minutes" },
+  { id: "water",      name: "110 oz of water",       detail: "Stay hydrated all day" },
+  { id: "fasting",    name: "Intermittent fasting",  detail: "Stick to the protocol" },
+  { id: "steps",      name: "15,000 steps",          detail: "Walk it out" },
+  { id: "workout",    name: "Workout",               detail: "Strength or cardio" },
+  { id: "vibration",  name: "Vibration plate",       detail: "15 minutes" },
+  { id: "sauna",      name: "SaunaBox",              detail: "20 minutes — evening" },
+  { id: "quality",    name: "Quality time",          detail: "30 min with a loved one" },
 ];
 
 const TOTAL = HABITS.length;
@@ -91,7 +91,6 @@ export default function App() {
   const day = getDay(currentDate);
   const doneCount = Object.values(day).filter(Boolean).length;
   const pct = Math.round((doneCount / TOTAL) * 100);
-  const sections = [...new Set(HABITS.map(h => h.section))];
   const tomorrow = offsetKey(todayKey(), 1);
 
   const s = {
@@ -105,9 +104,8 @@ export default function App() {
     stat: { background: "#f7f7f5", borderRadius: 10, padding: "10px 12px", textAlign: "center" },
     statNum: { fontSize: 24, fontWeight: 600, color: "#111" },
     statLabel: { fontSize: 11, color: "#999", marginTop: 2 },
-    progressWrap: { background: "#f0f0ee", borderRadius: 100, height: 5, marginBottom: "1.5rem", overflow: "hidden" },
+    progressWrap: { background: "#f0f0ee", borderRadius: 100, height: 5, marginBottom: "1.25rem", overflow: "hidden" },
     progressFill: { height: "100%", borderRadius: 100, background: "#16a37f", transition: "width 0.3s ease" },
-    sectionLabel: { fontSize: 11, fontWeight: 600, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.09em", margin: "1.1rem 0 0.35rem" },
     row: (done) => ({
       display: "flex", alignItems: "center", gap: 12, padding: "9px 10px",
       borderRadius: 9, cursor: "pointer",
@@ -151,29 +149,24 @@ export default function App() {
       <div style={s.progressWrap}>
         <div style={{ ...s.progressFill, width: pct + "%" }} />
       </div>
-      {sections.map(sec => (
-        <div key={sec}>
-          <div style={s.sectionLabel}>{sec}</div>
-          {HABITS.filter(h => h.section === sec).map(h => {
-            const done = !!day[h.id];
-            const streak = getHabitStreak(h.id);
-            return (
-              <div key={h.id} style={s.row(done)} onClick={() => toggle(h.id)}>
-                <div style={s.check(done)}>
-                  {done && <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>}
-                </div>
-                <div style={{ flex: 1 }}>
-                  <div style={s.habitName(done)}>{h.name}</div>
-                  <div style={s.habitDetail(done)}>{h.detail}</div>
-                </div>
-                <div style={s.badge(done)}>{streak}d</div>
-              </div>
-            );
-          })}
-        </div>
-      ))}
+      {HABITS.map(h => {
+        const done = !!day[h.id];
+        const streak = getHabitStreak(h.id);
+        return (
+          <div key={h.id} style={s.row(done)} onClick={() => toggle(h.id)}>
+            <div style={s.check(done)}>
+              {done && <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>}
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={s.habitName(done)}>{h.name}</div>
+              <div style={s.habitDetail(done)}>{h.detail}</div>
+            </div>
+            <div style={s.badge(done)}>{streak}d</div>
+          </div>
+        );
+      })}
       <button style={s.resetBtn} onClick={resetDay}>Reset today</button>
     </div>
   );
