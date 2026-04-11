@@ -19,21 +19,22 @@ const HABITS = [
 ];
 
 const TOTAL = HABITS.length;
+const TZ = "America/Chicago";
 
 function todayKey() {
-  return new Date().toISOString().split("T")[0];
+  return new Date().toLocaleDateString("en-CA", { timeZone: TZ });
 }
 
 function offsetKey(base, days) {
   const d = new Date(base + "T12:00:00");
   d.setDate(d.getDate() + days);
-  return d.toISOString().split("T")[0];
+  return d.toLocaleDateString("en-CA", { timeZone: TZ });
 }
 
 function formatDate(key) {
-  const d = new Date(key + "T12:00:00");
   const today = todayKey();
   const yesterday = offsetKey(today, -1);
+  const d = new Date(key + "T12:00:00");
   if (key === today) return "Today — " + d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   if (key === yesterday) return "Yesterday — " + d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
@@ -166,4 +167,4 @@ export default function App() {
       <button style={s.resetBtn} onClick={resetDay}>Reset today</button>
     </div>
   );
-      }
+}
