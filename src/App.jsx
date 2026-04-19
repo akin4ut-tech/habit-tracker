@@ -1,20 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
 
 const HABITS = [
-  { id: "stretch",    name: "Morning stretch" },
-  { id: "meditation", name: "Meditation" },
-  { id: "journal",    name: "Gratitude journal" },
   { id: "acv",        name: "ACV morning drink" },
-  { id: "pushups",    name: "75 push-ups" },
-  { id: "supps",      name: "Supplements" },
-  { id: "cold",       name: "Cold shower" },
-  { id: "ai",         name: "AI revenue focus" },
-  { id: "water",      name: "110 oz of water" },
-  { id: "fasting",    name: "Intermittent fasting" },
-  { id: "steps",      name: "15,000 steps" },
-  { id: "workout",    name: "Workout" },
   { id: "vibration",  name: "Vibration plate" },
-  { id: "sauna",      name: "SaunaBox" },
+  { id: "stretch",    name: "Morning stretch" },
+  { id: "meditation", name: "15 minute meditation" },
+  { id: "journal",    name: "Gratitude journal" },
+  { id: "pushups",    name: "100 push-ups" },
+  { id: "supps",      name: "Supplements" },
+  { id: "cold",       name: "3 minute cold shower" },
+  { id: "ai",         name: "60 minutes AI revenue" },
+  { id: "water",      name: "110 oz of water" },
+  { id: "fasting",    name: "16 hour intermittent fast" },
+  { id: "duolingo",   name: "Duolingo" },
+  { id: "workout",    name: "Workout" },
   { id: "quality",    name: "Quality time" },
 ];
 
@@ -77,18 +76,6 @@ export default function App() {
     return streak;
   };
 
-  const calcStreak = () => {
-    let streak = 0;
-    let key = todayKey();
-    const todayDone = Object.values(getDay(key)).filter(Boolean).length;
-    if (todayDone < TOTAL) key = offsetKey(key, -1);
-    while (streak <= 365) {
-      const done = Object.values(allData[key] || {}).filter(Boolean).length;
-      if (done >= TOTAL) { streak++; key = offsetKey(key, -1); } else break;
-    }
-    return streak;
-  };
-
   const day = getDay(currentDate);
   const doneCount = Object.values(day).filter(Boolean).length;
   const pct = Math.round((doneCount / TOTAL) * 100);
@@ -101,7 +88,7 @@ export default function App() {
     dateNav: { display: "flex", alignItems: "center", gap: 8 },
     navBtn: { background: "none", border: "1px solid #ddd", borderRadius: 8, padding: "4px 10px", cursor: "pointer", fontSize: 14, color: "#666" },
     dateLabel: { fontSize: 13, fontWeight: 500, minWidth: 165, textAlign: "center", color: "#444" },
-    statsRow: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: "1.25rem" },
+    statsRow: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: "1.25rem" },
     stat: { background: "#f7f7f5", borderRadius: 10, padding: "10px 12px", textAlign: "center" },
     statNum: { fontSize: 24, fontWeight: 600, color: "#111" },
     statLabel: { fontSize: 11, color: "#999", marginTop: 2 },
@@ -144,7 +131,6 @@ export default function App() {
       <div style={s.statsRow}>
         <div style={s.stat}><div style={s.statNum}>{doneCount}</div><div style={s.statLabel}>completed</div></div>
         <div style={s.stat}><div style={s.statNum}>{pct}%</div><div style={s.statLabel}>of today</div></div>
-        <div style={s.stat}><div style={s.statNum}>{calcStreak()}</div><div style={s.statLabel}>day streak</div></div>
       </div>
       <div style={s.progressWrap}>
         <div style={{ ...s.progressFill, width: pct + "%" }} />
