@@ -4,6 +4,7 @@ const HABITS = [
   { id: "acv",        name: "ACV morning drink" },
   { id: "vibration",  name: "Vibration plate" },
   { id: "stretch",    name: "Morning stretch" },
+  { id: "duolingo",   name: "Duolingo" },
   { id: "meditation", name: "15 minute meditation" },
   { id: "journal",    name: "Gratitude journal" },
   { id: "pushups",    name: "100 push-ups" },
@@ -12,9 +13,7 @@ const HABITS = [
   { id: "ai",         name: "60 minutes AI revenue" },
   { id: "water",      name: "110 oz of water" },
   { id: "fasting",    name: "16 hour intermittent fast" },
-  { id: "duolingo",   name: "Duolingo" },
   { id: "workout",    name: "Workout" },
-  { id: "quality",    name: "Quality time" },
 ];
 
 const TOTAL = HABITS.length;
