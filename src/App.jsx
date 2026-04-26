@@ -14,6 +14,7 @@ const HABITS = [
   { id: "water",      name: "110 oz of water" },
   { id: "fasting",    name: "16 hour intermittent fast" },
   { id: "workout",    name: "Workout" },
+    { id: "plank",    name: "Plank/Bicycle crunches" },
 ];
 
 const TOTAL = HABITS.length;
